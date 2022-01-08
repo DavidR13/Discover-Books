@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Discover Books | Best Sellers
+{% endblock %}
+
+{% block content %}
+        <div class="contain">
+            <table align="center" class="text" id="sellers">
+                <h1>Best Sellers List</h1>
+                <hr class="divider">
+            {% for i in response %}
+                <tr><td>
+                    <ul>
+                        <li>{{ i[0] }}. <a href="{{ i[4] }}">{{ i[1] }}</a> by {{ i[2] }}</li>
+                    </ul>
+                    <br>
+                    <img src="{{ i[3] }}" alt="">
+                </td></tr>
+            {% endfor %}
+            </table>
+        </div>
+{% endblock %}

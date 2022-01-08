@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Discover Books | Book Reviews
+{% endblock %}
+
+{% block content %}
+        <div class="reviews_container">
+            <table align="center" class="text" id="reviews">
+                <h1>Book Reviews</h1>
+                <hr class="divider">
+            {% for i in response %}
+                <tr><td>
+                    <ul>
+                        <li>
+                            <a href="{{ i[3] }}">{{ i[0] }}</a> by {{ i[1] }}
+                            <p>----------</p>
+                            <span>Summary:</span> {{ i[2] }}
+                        </li>
+                    </ul>
+                    <br>
+                </td></tr>
+            {% endfor %}
+            </table>
+        </div>
+{% endblock %}

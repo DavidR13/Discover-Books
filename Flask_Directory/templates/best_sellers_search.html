@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Discover Books | Best Sellers Search
+{% endblock %}
+
+{% block content %}
+    <section class="p-5 text-center sellers-search" id="page-section">
+        <div class="container">
+            <div class="title">
+                <h1>Find Best Seller Books</h1>
+            </div>
+            <div class="search-form">
+                <form action="" method="post" class="text">
+                    {{ form.hidden_tag() }}
+                    <hr class="divider">
+                    <p class="p-4">
+                        Pick a date or just leave it blank for the current date:
+                        {{ form.date_field() }}
+                    </p>
+                    <p>
+                        Select a book genre that interests you:
+                        {{ form.genre() }}
+                    </p>
+                    <p>
+                        {{ form.submit() }}
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

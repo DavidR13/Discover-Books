@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Discover Books | Book Reviews Search
+{% endblock %}
+
+{% block content %}
+    <section class="p-5 reviews-search text-center" id="page-section">
+        <div class="container">
+            <div class="title">
+                <h1>Book Reviews Search</h1>
+            </div>
+            <div class="search-form">
+                <form action="" method="post" class="text">
+                    {{ form.hidden_tag() }}
+                    <hr class="divider">
+                    <h4>Search book reviews based on ISBN, book title, or author.</h4>
+                    <p>
+                        Enter an ISBN (10 or 13 digits only):
+                        {{ form.isbn() }}
+                    </p>
+                    <p>
+                        {{ form.submit() }}
+                    </p>
+                    <p>
+                        Enter a book title:
+                        {{ form.title() }}
+                    </p>
+                    <p>
+                        {{ form.submit() }}
+                    </p>
+                    <p>
+                        Enter an author:
+                        {{ form.author() }}
+                    </p>
+                    <p>
+                        {{ form.submit() }}
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
