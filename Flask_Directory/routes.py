@@ -50,11 +50,6 @@ def book_reviews(option):
         # Get results if ISBN option is selected
         if option == 'isbn':
             selected_isbn = request.form["isbn"]
-
-            if not selected_isbn:
-                flash("Please fill in the information to look for book reviews.")
-                return render_template("book_reviews_search.html", form=form_bookreviews, option=option)
-
             isbn_reviews = api_methods.request_book_reviews_isbn(selected_isbn)
 
             if not isbn_reviews["results"]:

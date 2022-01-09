@@ -1,6 +1,6 @@
 from wtforms import StringField, SelectField, SubmitField, IntegerField
 from flask_wtf import FlaskForm
-from wtforms.validators import Length
+from wtforms.validators import Length, InputRequired
 from wtforms.fields.html5 import DateField
 
 
@@ -15,9 +15,9 @@ class Options(FlaskForm):
 
 class BookForms(FlaskForm):
     date_field = DateField('Date Picker', format='%Y-%m-%d')
-    title = StringField("Title")
-    isbn = IntegerField("ISBN", validators=[Length(min=10, max=13)])
-    author = StringField("Author")
+    title = StringField("Title", validators=[InputRequired()])
+    isbn = IntegerField("ISBN", validators=[Length(min=10, max=13), InputRequired()])
+    author = StringField("Author", validators=[InputRequired()])
     genre = SelectField("genre", choices=[
         ('combined-print-and-e-book-fiction', 'Combined Print and E-Book Fiction'),
         ('combined-print-and-e-book-nonfiction',
