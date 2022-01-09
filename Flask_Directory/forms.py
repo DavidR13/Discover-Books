@@ -4,6 +4,15 @@ from wtforms.validators import Length
 from wtforms.fields.html5 import DateField
 
 
+class Options(FlaskForm):
+    option = SelectField("option", choices=[
+        ('title', 'Book Title'),
+        ('isbn', 'ISBN'),
+        ('author', 'Author')
+    ], default='title')
+    submit = SubmitField("Submit")
+
+
 class BookForms(FlaskForm):
     date_field = DateField('Date Picker', format='%Y-%m-%d')
     title = StringField("Title")
@@ -72,4 +81,4 @@ class BookForms(FlaskForm):
         ('travel', 'Travel'),
         ('young-adult-paperback-monthly', 'Young Adult Paperback Monthly')
     ], default="hardcover-fiction")
-    submit = SubmitField("Search")
+    search = SubmitField("Search")

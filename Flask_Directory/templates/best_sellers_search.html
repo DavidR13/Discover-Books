@@ -7,23 +7,38 @@
 {% block content %}
     <section class="p-5 text-center sellers-search" id="page-section">
         <div class="container">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-danger alter-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
             <div class="title">
-                <h1>Find Best Seller Books</h1>
+                <h1 id="page-titles">Find Best Seller Books</h1>
             </div>
             <div class="search-form">
-                <form action="" method="post" class="text">
+                <form action="" method="post">
                     {{ form.hidden_tag() }}
                     <hr class="divider">
+                    <h4>Find best sellers books based on dates and genres</h4>
                     <p class="p-4">
                         Pick a date or just leave it blank for the current date:
+                        <br>
                         {{ form.date_field() }}
                     </p>
                     <p>
-                        Select a book genre that interests you:
+                        And select a book genre that interests you:
+                        <br>
                         {{ form.genre() }}
                     </p>
                     <p>
-                        {{ form.submit() }}
+                        {{ form.search() }}
                     </p>
                 </form>
             </div>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Discover Books | Book Reviews Options
+{% endblock %}
+
+{% block content %}
+    <section class="p-5 reviews-search text-center" id="page-section">
+        <div class="container">
+            <div class="title">
+                <h1 id="page-titles">Book Reviews Options</h1>
+            </div>
+            <div class="search-form">
+                <form action="" method="post">
+                    <hr class="divider">
+                    <h5>Search book reviews based on ISBN, book title, or author</h5>
+                    <br>
+                    <p>
+                        What would you like to search by?
+                        {{ option_form.option() }}
+                    </p>
+                    <p>
+                        {{ option_form.submit() }}
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

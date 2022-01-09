@@ -88,14 +88,37 @@ html, body, section {
     font-size: 48px;
 }
 
-/* BEST SELLERS SEARCH PAGE */
-.sellers-search .container {
-    width: 80vh
-}
-
-/* ALL PAGE STYLING */
+/* SEARCH AND RESULTS PAGES STYLING */
 #page-section {
     padding-top: 30vh !important;
     height: 100vh;
 }
 
+.return {
+    text-decoration: none;
+    color: var(--primary_color);
+}
+
+.return:hover {
+    color: var(--light_accent);
+}
+
+.book-link {
+    text-decoration: none;
+}
+
+.book-link h5 {
+    color: var(--primary_color);
+}
+
+.book-link h5:hover {
+    color: var(--light_accent);
+}
+
+#page-section .container .row .col-md-4 .card {
+    border: 1px solid var(--dark-accent);
+}
+
+#page-titles {
+    color: var(--dark-accent);
+}

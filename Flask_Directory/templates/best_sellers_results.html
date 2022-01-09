@@ -1,23 +1,38 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Discover Books | Best Sellers
+    Discover Books | Best Sellers Results
 {% endblock %}
 
 {% block content %}
-        <div class="contain">
-            <table align="center" class="text" id="sellers">
-                <h1>Best Sellers List</h1>
-                <hr class="divider">
-            {% for i in response %}
-                <tr><td>
-                    <ul>
-                        <li>{{ i[0] }}. <a href="{{ i[4] }}">{{ i[1] }}</a> by {{ i[2] }}</li>
-                    </ul>
-                    <br>
-                    <img src="{{ i[3] }}" alt="">
-                </td></tr>
-            {% endfor %}
-            </table>
+    <section class="p-5 sellers-results" id="page-section">
+        <div class="container">
+            <div class="title text-center">
+                <h1>Best Sellers Results</h1>
+                <p>Based on the date of
+                    {% if date != '' %}
+                    <strong>{{ date }}</strong>
+                    {% else %}
+                    <strong>today </strong>
+                    {% endif %}
+                    and genre of <strong>{{ name }}</strong>.</p>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                {% for book in response %}
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100 mx-auto" style="width: 22rem;">
+                        <img src="{{ book[3] }}" alt="{{ book[1] }} image" class="card-img-top">
+                        <div class="card-body">
+                            <a href="{{ book[4] }}" class="book-link">
+                                <h5 class="card-title">{{ book[0] }}. {{ book[1] }}</h5>
+                            </a>
+                            <p class="card-text"><strong>Author:</strong> {{ book[2] }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+    </section>
 {% endblock %}

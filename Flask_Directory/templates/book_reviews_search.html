@@ -7,37 +7,59 @@
 {% block content %}
     <section class="p-5 reviews-search text-center" id="page-section">
         <div class="container">
-            <div class="title">
-                <h1>Book Reviews Search</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-danger alter-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <div class="row justify-content-between">
+                <div class="back col-1 pb-4">
+                    <a href="{{ url_for('book_reviews_options') }}" class="return"><< Back</a>
+                </div>
+                <div class="title">
+                    <h1 class="text-center" id="page-titles">Book Reviews Search</h1>
+                </div>
             </div>
-            <div class="search-form">
-                <form action="" method="post" class="text">
-                    {{ form.hidden_tag() }}
-                    <hr class="divider">
-                    <h4>Search book reviews based on ISBN, book title, or author.</h4>
-                    <p>
-                        Enter an ISBN (10 or 13 digits only):
-                        {{ form.isbn() }}
-                    </p>
-                    <p>
-                        {{ form.submit() }}
-                    </p>
-                    <p>
-                        Enter a book title:
-                        {{ form.title() }}
-                    </p>
-                    <p>
-                        {{ form.submit() }}
-                    </p>
-                    <p>
-                        Enter an author:
-                        {{ form.author() }}
-                    </p>
-                    <p>
-                        {{ form.submit() }}
-                    </p>
-                </form>
-            </div>
+            <hr class="divider">
+            <br>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+
+                {% if option == 'isbn' %}
+                <p>
+                    Enter an ISBN (10 or 13 digits only):
+                    {{ form.isbn() }}
+                </p>
+                <p>
+                    {{ form.search() }}
+                </p>
+
+                {% elif option == 'title' %}
+                <p>
+                    Enter a book title:
+                    {{ form.title() }}
+                </p>
+                <p>
+                    {{ form.search() }}
+                </p>
+
+                {% else %}
+                <p>
+                    Enter an author:
+                    {{ form.author() }}
+                </p>
+                <p>
+                    {{ form.search() }}
+                </p>
+                {% endif %}
+            </form>
         </div>
     </section>
 {% endblock %}
