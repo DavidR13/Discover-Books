@@ -44,7 +44,6 @@ def book_reviews_options():
 @app.route('/book-reviews/<string:option>', methods=["GET", "POST"])
 def book_reviews(option):
     form_bookreviews = forms.BookForms(request.form)
-    bookreviews_list = []
 
     if request.method == 'POST':
         # If ISBN option is selected
@@ -52,13 +51,7 @@ def book_reviews(option):
             selected_isbn = request.form["isbn"]
             isbn_reviews = api_methods.request_book_reviews_isbn(selected_isbn)
 
-            if not isbn_reviews["results"]:
-                flash(f'Sorry, there are no best sellers for the ISBN {selected_isbn}')
-                return render_template("book_reviews_search.html", form=form_bookreviews, option=option)
-
-            for review in isbn_reviews["results"]:
-                reviews_info = (review["book_title"], review["book_author"], review["summary"], review["url"])
-                bookreviews_list.append(reviews_info)
+            bookreviews_list = get_reviews_list(isbn_reviews, selected_isbn, option)
 
             return render_template("book_reviews_results.html", response=bookreviews_list, value=selected_isbn)
 
@@ -67,13 +60,7 @@ def book_reviews(option):
             selected_title = request.form["title"]
             title_reviews = api_methods.request_book_reviews_title(selected_title)
 
-            if not title_reviews["results"]:
-                flash(f'Sorry, there are no best sellers for the title {selected_title}')
-                return render_template("book_reviews_search.html", form=form_bookreviews, option=option)
-
-            for review in title_reviews["results"]:
-                reviews_info = (review["book_title"], review["book_author"], review["summary"], review["url"])
-                bookreviews_list.append(reviews_info)
+            bookreviews_list = get_reviews_list(title_reviews, selected_title, option)
 
             return render_template("book_reviews_results.html", response=bookreviews_list, value=selected_title)
 
@@ -82,14 +69,21 @@ def book_reviews(option):
             selected_author = request.form["author"]
             author_reviews = api_methods.request_book_reviews_author(selected_author)
 
-            if not author_reviews["results"]:
-                flash(f'Sorry, there are no best sellers for the author {selected_author}')
-                return render_template("book_reviews_search.html", form=form_bookreviews, option=option)
-
-            for review in author_reviews["results"]:
-                reviews_info = (review["book_title"], review["book_author"], review["summary"], review["url"])
-                bookreviews_list.append(reviews_info)
+            bookreviews_list = get_reviews_list(author_reviews, selected_author, option)
 
             return render_template("book_reviews_results.html", response=bookreviews_list, value=selected_author)
 
     return render_template("book_reviews_search.html", form=form_bookreviews, option=option)
+
+
+def get_reviews_list(reviews, value, option):
+    bookreviews = []
+
+    if not reviews["results"]:
+        flash(f'Sorry, there are no best sellers for the {option} {value}')
+        return redirect(url_for('book_reviews', option=option))
+    for review in reviews["results"]:
+        reviews_info = (review["book_title"], review["book_author"], review["summary"], review["url"])
+        bookreviews.append(reviews_info)
+
+    return bookreviews
