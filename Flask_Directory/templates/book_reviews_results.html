@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Discover Books | Book Reviews
+    Discover Books | Book Reviews Results
 {% endblock %}
 
 {% block content %}
-        <div class="reviews_container">
-            <table align="center" class="text" id="reviews">
-                <h1>Book Reviews</h1>
-                <hr class="divider">
-            {% for i in response %}
-                <tr><td>
-                    <ul>
-                        <li>
-                            <a href="{{ i[3] }}">{{ i[0] }}</a> by {{ i[1] }}
-                            <p>----------</p>
-                            <span>Summary:</span> {{ i[2] }}
-                        </li>
-                    </ul>
-                    <br>
-                </td></tr>
-            {% endfor %}
-            </table>
+    <section class="p-5 reviews-results" id="results">
+        <div class="container">
+            <div class="title text-center">
+                <h1 id="page-titles">Book Reviews Results</h1>
+                <p>{{ value }}</p>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                {% for review in response %}
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100 mx-auto" style="width: 25rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ review[0] }}</h5>
+                            <h6 class="card-subtitle mb-3 text-muted"><strong>Author:</strong> {{ review[1] }}</h6>
+                            <p class="card-text">{{ review[2] }}</p>
+                            <a href="{{ review[3] }}" class="card-link">Check out the review</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+    </section>
 {% endblock %}

@@ -94,6 +94,11 @@ html, body, section {
     height: 100vh;
 }
 
+#results {
+    padding-top: 20vh !important;
+    height: 100vh;
+}
+
 .return {
     text-decoration: none;
     color: var(--primary_color);
@@ -121,4 +126,12 @@ html, body, section {
 
 #page-titles {
     color: var(--dark-accent);
+}
+
+.card-title {
+    color: var(--primary_color);
+}
+
+.card-link:hover {
+    color: var(--light_accent);
 }
