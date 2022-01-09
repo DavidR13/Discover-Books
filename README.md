@@ -5,7 +5,9 @@
 * Bootstrap
 * Python
 * Flask (Flask Forms)
+* JSON
 * New York Times Books API
+* Heroku/Heroku CLI
 
 ## Description
 This is a  simple web application that gives users the
